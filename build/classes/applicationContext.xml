@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+
+<bean name="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+<property name="DriverClass" value="com.mysql.cj.jdbc.Driver"/>
+<property name="JdbcUrl" value="jdbc:mysql://localhost:3306/login?serverTimezone=UTC"/>
+<property name="User" value="root"/>
+<property name="Password" value="1234"/>
+</bean>
+
+<bean name="userDao" class="allPackages.dao.UserDaoImpl">
+<property name="dataSource" ref="dataSource"/>
+</bean>
+
+<bean name="userService" class="allPackages.service.UserServiceImpl">
+   <property name="ud" ref="userDao"/>
+</bean>
+</beans>
